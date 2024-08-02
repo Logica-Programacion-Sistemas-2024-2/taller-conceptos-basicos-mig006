@@ -20,7 +20,7 @@ public class App {
     public static String convertirVelocidad(double kmPorSeg) {
         try {
             // Lógica interna
-            return (kmPorSeg*1000)+"|"+(kmPorSeg*1000*3600);
+            return (int)(kmPorSeg*1000)+"|"+(int)(kmPorSeg*1000*3600);
         } catch (Exception e) {
             return "0|0";
         }
@@ -71,7 +71,7 @@ public class App {
     public static String calcularPesoNeto(double peso) {
         try {
             // Lógica interna
-            return (peso/1000)+"|"+(peso/1000000);
+            return (int)(peso/1000)+"|"+(int)(peso/1000000);
         } catch (Exception e) {
             return "0|0";
         }
@@ -81,7 +81,12 @@ public class App {
     public static int calcularTiempoViaje(double distancia, double velocidadKilometros, double velocidadHora) {
         try {
             // Lógica interna
-            return (int) (distancia/(velocidadKilometros/velocidadHora));
+            if (velocidadKilometros !=0) {
+                return (int) (distancia/(velocidadKilometros/velocidadHora));
+            } else {
+                return -1;
+            }
+            
         } catch (Exception e) {
             return -1;
         }
@@ -122,7 +127,7 @@ public class App {
     public static String calcularCuentaRestaurante(double costoComida) {
         try {
             // Lógica interna
-            return (costoComida*0.1)+"|"+(costoComida*0.08)+"|"+(costoComida + (costoComida*0.1) + (costoComida*0.08));
+            return (int)(costoComida*0.1)+"|"+(int)(costoComida*0.08)+"|"+(int)(costoComida + (costoComida*0.1) + (costoComida*0.08));
         } catch (Exception e) {
             return -1 + "|" + -1 + "|" + -1;
         }
@@ -143,7 +148,12 @@ public class App {
                                         double porcentaje1, double porcentaje2, double porcentaje3, double porcentaje4, double porcentaje5) {
         try {
             // Lógica interna
-            return (int) (((nota1*porcentaje1) + (nota2*porcentaje2) + (nota3*porcentaje3) + (nota3*porcentaje3) + (nota4*porcentaje4) + (nota5*porcentaje5)) / (porcentaje1 + porcentaje2 + porcentaje3 + porcentaje4 + porcentaje5));
+            if((porcentaje1 + porcentaje2 + porcentaje3 + porcentaje4 + porcentaje5) == 1){
+                return (int) (((nota1*porcentaje1) + (nota2*porcentaje2) + (nota3*porcentaje3) + (nota3*porcentaje3) + (nota4*porcentaje4) + (nota5*porcentaje5)) / (porcentaje1 + porcentaje2 + porcentaje3 + porcentaje4 + porcentaje5));
+            }
+            else{
+                return -1;
+            }
         } catch (Exception e) {
             return -1;
         }
@@ -153,7 +163,12 @@ public class App {
     public static int calcularNotaNecesaria(double porcentaje1, double porcentaje2, double porcentaje3, double porcentaje4, double porcentaje5, double nota1, double nota2, double nota3, double nota4) {
         try {
             // Lógica interna
-            return (int) (3 - ((nota1*porcentaje1) + (nota2*porcentaje2) + (nota3*porcentaje3) + (nota3*porcentaje3) + (nota4*porcentaje4)) / (porcentaje1 + porcentaje2 + porcentaje3 + porcentaje4 + porcentaje5)) ;
+            if (porcentaje1 + porcentaje2 + porcentaje3 + porcentaje4 + porcentaje5 != 0) {
+                return (int) (3 - ((nota1*porcentaje1) + (nota2*porcentaje2) + (nota3*porcentaje3) + (nota3*porcentaje3) + (nota4*porcentaje4)) / (porcentaje1 + porcentaje2 + porcentaje3 + porcentaje4 + porcentaje5));
+            } else {
+                return -1;
+            }
+            
         } catch (Exception e) {
             return -1;
         }
@@ -163,7 +178,12 @@ public class App {
     public static int calcularSalario(int horasNormales, int horasExtrasDiurnas, int horasExtrasNocturnas, double valorHoraNormal) {
         try {
             // Lógica interna
-            return (int) ((horasNormales*valorHoraNormal) + (horasExtrasDiurnas*(valorHoraNormal+(valorHoraNormal*0.15))) + (horasExtrasNocturnas*(valorHoraNormal+(valorHoraNormal*0.35))));
+            if (valorHoraNormal != 0) {
+                return (int) ((horasNormales*valorHoraNormal) + (horasExtrasDiurnas*(valorHoraNormal+(valorHoraNormal*0.15))) + (horasExtrasNocturnas*(valorHoraNormal+(valorHoraNormal*0.35))));
+            } else {
+                return -1;
+            }
+            
         } catch (Exception e) {
             return -1;
         }
@@ -230,5 +250,7 @@ public class App {
         System.out.println(calcularPerimetroCuadrado(5));
         System.out.println(calcularVolumenCilindro(3, 5));
         System.out.println(calcularAreaCirculo(7));
+
+
     }
 }
